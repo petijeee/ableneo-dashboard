@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Marketing Scorecard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=2">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div id="app">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-left">
+        <h1>Marketing Scorecard</h1>
+        <span class="subtitle" id="subtitle-week">2026</span>
+      </div>
+      <div class="header-right">
+        <div class="view-toggle">
+          <button id="btn-view-weekly" class="toggle-btn toggle-active">Týždeň</button>
+          <button id="btn-view-monthly" class="toggle-btn">Mesiac</button>
+        </div>
+        <select id="week-selector" class="week-selector"></select>
+        <select id="month-selector" class="week-selector" style="display:none"></select>
+        <button id="btn-new-week" class="btn-primary">+ Nový týždeň</button>
+      </div>
+    </header>
+
+    <!-- LOADING / ERROR STATE -->
+    <div id="loading" class="state-message">Načítavam dáta z Notion…</div>
+    <div id="error" class="state-message error" style="display:none"></div>
+
+    <!-- MAIN CONTENT (hidden until data loads) -->
+    <main id="main-content" style="display:none">
+
+      <!-- SECTION 1: KEY RESULTS -->
+      <section class="section">
+        <h2 class="section-title">Key Results</h2>
+        <div id="kr-grid" class="kr-grid"></div>
+      </section>
+
+      <!-- SECTION 2: TREND CHARTS -->
+      <section class="section">
+        <h2 class="section-title" id="trend-section-title">Trendy — posledné týždne</h2>
+        <div id="trend-grid" class="trend-grid"></div>
+      </section>
+
+      <!-- SECTION 3: LEADING INDICATORS -->
+      <section class="section">
+        <h2 class="section-title">Leading Indicators</h2>
+        <div class="table-wrapper">
+          <table id="li-table" class="li-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Aktivita</th>
+                <th id="li-period-header">Tento týždeň</th>
+                <th id="li-prev-header">Min. týždeň</th>
+                <th>4-týž. avg</th>
+                <th>Trend</th>
+                <th>Target</th>
+              </tr>
+            </thead>
+            <tbody id="li-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION 4: TOP 3 PRIORITY + NOTES (weekly only) -->
+      <div class="two-col weekly-only">
+        <section class="section">
+          <h2 class="section-title">Top 3 Priority</h2>
+          <div id="priorities"></div>
+        </section>
+        <section class="section">
+          <h2 class="section-title">Poznámky & Blokéry</h2>
+          <div id="notes" class="notes-box"></div>
+        </section>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- NEW WEEK MODAL -->
+  <div id="modal-overlay" class="modal-overlay" style="display:none">
+    <div class="modal">
+      <h3>Vytvoriť nový týždeň</h3>
+      <label>Začiatok týždňa (pondelok)
+        <input type="date" id="new-week-date" />
+      </label>
+      <div class="modal-actions">
+        <button id="modal-cancel" class="btn-secondary">Zrušiť</button>
+        <button id="modal-create" class="btn-primary">Vytvoriť</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js?v=2"></script>
+</body>
+</html>
