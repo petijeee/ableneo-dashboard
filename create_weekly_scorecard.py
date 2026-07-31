@@ -13,7 +13,7 @@ if not token or not db_id:
     print("ERROR: Missing NOTION_TOKEN or NOTION_DB_ID in .env")
     sys.exit(1)
 
-today = date(2026, 7, 3)
+today = date.today()
 monday = today - timedelta(days=today.weekday())
 friday = monday + timedelta(days=4)
 week_num = monday.isocalendar()[1]
